@@ -633,7 +633,7 @@ analytic rules, $2000$ data sets & how conservative the guarantees are for these
 sensitivity to a shared latent law & the Discussion: the guarantees need one latent law shared by all units \\
 oracle-matched widths & the width needed for a guarantee, separated from the shape of the interval \\
 LatentCP and deconvolution & comparison with the methods of \citet{zheng2026} and \citet{cohen2025} \\
-school districts & behaviour on survey data with estimated variances, which no guarantee covers \\
+school districts & the rank of Theorem~\ref{M-prop:unknown}, which needs no variances, and rules that plug in estimated variances, which no guarantee covers \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -651,7 +651,7 @@ The design is that of \S~\ref{M-sec:numerical} (\texttt{experiments/e43\_same\_i
 
 \begin{table}[h]
 \centering
-\caption{Stress test, equal variances: mean conditional latent coverage and reliability (standard errors in parentheses), target $0.9$ and $0.95$; the rows for $K = 10^3$ and $10^4$ are Table~\ref{M-tab:stress}}
+\caption{Stress test, equal variances: mean conditional latent coverage and reliability (standard errors in parentheses), target $0.9$ and $0.95$; Table~\ref{M-tab:stress} gives the rows for $K = 10^3$ and $10^4$ with exact reliabilities}
 \label{tab:s-stress}
 \begin{tabular}{llccc}
 \toprule
@@ -746,7 +746,7 @@ The tuning grids of LatentCP and the scan step $0.01$ of the deconvolution thres
 
 \subsection*{School districts}
 
-In the finite population \texttt{apipop} \citep{lumley2004}, $110$ of $325$ school districts are used for training and $110$ for calibration, with $2$ or $3$ schools sampled per district. Coverage is the share of the remaining $105$ districts that are covered. Design variances are estimated with $1$--$2$ degrees of freedom and plugged in as known by every rule, a case that no guarantee covers. Over four conditions of $120$ replications, the reliability of the heterogeneous rule, the computed radius with the average kernel, was $0.942$--$0.992$, of the mean-variance rule, which plugs the mean variance into a single Gaussian kernel, $0.983$--$1.000$ and of the Fay--Herriot interval $0.908$--$0.992$, below target in two conditions. The heterogeneous rule at level $p_k$ was $0.8$--$5.2\%$ shorter than the mean-variance rule calibrated at level $p = q$, mostly because of the level, and $10$--$16\%$ longer than the Fay--Herriot interval.
+In the finite population \texttt{apipop} \citep{lumley2004}, $110$ of $325$ school districts are used for training and $110$ for calibration, with $2$ or $3$ schools sampled per district. Coverage is the share of the remaining $105$ districts that are covered. Design variances are estimated with $1$--$2$ degrees of freedom and plugged in as known by every rule that uses them, a case that no guarantee covers. The noisy threshold at the rank of Theorem~\ref{M-prop:unknown}, $k = 105$ for the three bi-log-concave rows of Table~\ref{M-tab:map}, uses none: it had reliability $1.000$ in every condition, mean coverage $0.973$--$0.989$, and was $7$--$12\%$ longer than the heterogeneous rule and $19$--$26\%$ longer than the Fay--Herriot interval. Its guarantee still needs the noise of the direct estimates to lie in the stated class and the latent residuals to share a bi-log-concave law. Over four conditions of $120$ replications, the reliability of the heterogeneous rule, the computed radius with the average kernel, was $0.942$--$0.992$, of the mean-variance rule, which plugs the mean variance into a single Gaussian kernel, $0.983$--$1.000$ and of the Fay--Herriot interval $0.908$--$0.992$, below target in two conditions. The heterogeneous rule at level $p_k$ was $0.8$--$5.2\%$ shorter than the mean-variance rule calibrated at level $p = q$, mostly because of the level, and $10$--$16\%$ longer than the Fay--Herriot interval.
 
 \section{Reproducibility}\label{sec:s-code}
 
