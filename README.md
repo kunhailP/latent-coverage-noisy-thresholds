@@ -1,6 +1,6 @@
 # Latent coverage from noisy calibration
 
-Code, results and manuscript for the paper *Latent coverage from noisy calibration* by Kun Woo Park (in preparation for *Biometrika*). Every number in the paper and its Supplementary Material can be regenerated from this repository.
+Code, results and manuscript for the paper *Latent coverage from noisy calibration* by Kun Woo Park (submitted to *Biometrika*). Every number in the paper and its Supplementary Material can be regenerated from this repository.
 
 ## The question
 
