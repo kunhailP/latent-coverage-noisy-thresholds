@@ -54,10 +54,10 @@ Theorem~\ref{M-thm:classes}(ii), mean-zero log-concave noise & \S~\ref{sec:s-gen
 Theorem~\ref{M-thm:classes}(iii), mean-zero unimodal noise & \S~\ref{sec:s-general} & proved \\
 Proposition~\ref{M-prop:latentshape} & \S~\ref{sec:s-general} & proved; examples in closed form \\
 Theorem~\ref{M-prop:unknown}; ranks of Table~\ref{M-tab:map} & \S~\ref{sec:s-ranks} & proved; ranks computed exactly \\
-Proposition~\ref{M-prop:fail}; stress-test reliabilities & main text; \S~\ref{sec:s-sim} & proved; exact binomial values and simulation \\
+Proposition~\ref{M-prop:fail}; Table~\ref{M-tab:stress} & main text; \S~\ref{sec:s-sim} & proved; exact binomial values and simulation \\
 Theorem~\ref{M-thm:small} & \S~\ref{sec:s-gauss}; constants \S~\ref{sec:s-cert} & proved; $c_q$ certified in ball arithmetic \\
 feasibility bound and the $1.16\%$ and $0.22\%$ widenings & \S~\ref{sec:s-gauss}, feasibility; shape of the radius & proved; $0.22\%$ in double precision \\
-Theorems~\ref{M-thm:mean} and~\ref{M-thm:transition} & \S~\ref{sec:s-gauss} & proved; $\kappa^*_q$ in double precision \\
+location of the mean (\S~\ref{M-sec:mean}) & \S~\ref{sec:s-gauss}, Theorems~\ref{thm:mean} and~\ref{thm:transition} & proved; $\kappa^*_q$ in double precision \\
 Corollary~\ref{M-cor:slack} & \S~\ref{sec:s-gauss}, \S~\ref{sec:s-cert} & proved; slack intervals certified \\
 rules with known variances (\S~\ref{sec:s-hetero}) & \S\S~\ref{sec:s-ranks}, \ref{sec:s-gauss}, \ref{sec:s-hetero} & proved; computed radius in double precision \\
 Table~\ref{M-tab:sameinfo} & \S~\ref{sec:s-sim} & simulation, exact conditional coverage \\
@@ -154,7 +154,7 @@ which holds for every cut $u$ because $h(y) \le 1(y \le u) + q \mathrm{e}^{-y} 1
 Each bound is below the target for $\sigma$ beyond a threshold at its end, found in ball arithmetic as for $L$.
 \end{enumerate}
 
-\emph{Results.} At $q = 0.9$ the certificate gives $\Psi_{\mathcal E}(0.9) < 0.9052$; the largest certified bound for this target is $0.90519999990$, so the margin is about $10^{-10}$. The centred exponential with $\sigma = 0.11777$ gives $\Psi_{\mathcal E}(0.9) > 0.90517$; it gives $\Psi_{\mathcal E}(0.8942) > 0.9$ at $\sigma = 0.1259$.
+\emph{Results.} At $q = 0.9$ the certificate gives $\Psi_{\mathcal E}(0.9) < 0.9052$; boxes are split until their bounds fall below this target, so the largest bound, just below $0.9052$, reflects the stopping rule; the target itself lies $2.4\times10^{-5}$ above the value at the centred exponential law. The centred exponential with $\sigma = 0.11777$ gives $\Psi_{\mathcal E}(0.9) > 0.90517$; it gives $\Psi_{\mathcal E}(0.8942) > 0.9$ at $\sigma = 0.1259$.
 
 For the two-sided levels, a partition of the noisy failure probability $a_L \in [0, (1 - p)/2]$ at the left end is proposed from the centred exponential values: on each interval $[a_0, a_1]$ the bound $\phi_{\mathcal E}(a_1) + \phi_{\mathcal E}(1 - p - a_0)$, evaluated at those values, uses at most half of the margin below $1 - q$, and the other half is left for the certificates. Every node $a$ is then certified by the branch and bound at a level $q_a$ below $\lambda_{\mathcal E}(1 - a)$; this certifies the noisy level $0.906$ for latent level $0.9$, with $41$ intervals, and noisy level $0.9$ for latent level $0.8935$, with $45$ intervals (\texttt{split\_certificate\_lc}).
 
@@ -221,7 +221,7 @@ $\bar F(T) < p_k$ exactly when $N = \#\{i : |V_i| < \bar F^{-1}(p_k)\} \ge k$. $
 
 \section{Gaussian noise: the sharp radius and the location of the mean}\label{sec:s-gauss}
 
-This section proves the results of \S~\ref{M-sec:mean}, for Gaussian noise $e \sim N(0, D)$, after scaling the threshold $t$ to $1$, with $x = D/t^2$ and $R_{p,q}$ defined by \eqref{M-eq:R}.
+This section proves the results of \S~\ref{M-sec:mean} and states and proves Theorems~\ref{thm:mean} and~\ref{thm:transition} on the location of the mean, for Gaussian noise $e \sim N(0, D)$, after scaling the threshold $t$ to $1$, with $x = D/t^2$ and $R_{p,q}$ defined by \eqref{M-eq:R}.
 
 \subsection*{Reduction to log-affine laws}
 
@@ -283,7 +283,38 @@ by splitting the event $Y + Z < -\tau$ according to whether $Z < -(\tau + b_{\mi
 
 The kernel $g_x(w) = \pr(|w + x^{1/2}Z| \le 1)$ is symmetric in $w$ and maximal at $w = 0$, so $E\{g_x(W)\} \le g_x(0) = 2\Phi(x^{-1/2}) - 1$ for every $W$. A latent law is therefore feasible at level $q$ only if $2\Phi(x^{-1/2}) - 1 \ge q$, that is $x^{1/2} \le 1/\Phi^{-1}\{(1+q)/2\}$. With Theorem~\ref{M-thm:small}, the widening $Q_q(|W|) - 1 \le c_q x^{1/2}$ is at most $c_q/\Phi^{-1}\{(1+q)/2\}$, which is $0.01906/1.6449 < 1.16\%$ at $q = 0.9$ for every $W \in \mathcal B$. The smaller bound $0.22\%$ for log-concave laws rests on the double-precision bounds of \S~\ref{sec:s-cert} (\S~\ref{sec:s-shape}).
 
-\subsection*{A constraint on the mean}
+\subsection*{The location of the mean}
+
+Let $R^{(b)}_{p,q}$ be defined as $R_{p,q}$ in \eqref{M-eq:R} with the additional constraint $|E(W)| \le b$, so that the mean is at least $1 - b$ from $\pm 1$. A mean away from the boundary reduces the order of the widening from $x^{1/2}$ to $x$.
+
+\begin{theorem}\label{thm:mean}
+Let $W \in \mathcal B$ with $|E(W)| \le M$, let $\sigma > 0$ and $t > M$, and suppose that $\pr(|W + \sigma Z| \le t) \ge q$. Then
+\[
+Q_q(|W|) \le M + \{(t - M)^2 + \sigma^2\}^{1/2} \le t + \frac{\sigma^2}{2(t - M)}.
+\]
+In particular $R^{(b)}_{p,q}(x) \le 1 + x/\{2(1 - b)\}$ for all $p \ge q$ and $x > 0$.
+\end{theorem}
+
+Here $\sigma^2 = D$ in the original units. A mean far from an end of the interval caps how steeply the density can rise towards it; the proof makes this precise with the heat equation for quantiles \citep{steinbrecher2008}. The order $x$ cannot be improved, even for mean-zero laws: centred log-affine laws attain it (Proposition~\ref{prop:centred}), so centring does not replace symmetry.
+
+The order $x^{1/2}$ returns only when the mean is within a bounded number of noise standard deviations of the boundary. With $b_x = 1 - \kappa x^{1/2}$, the constraint $|E(W)| \le b_x$ places the mean at least $\kappa$ noise standard deviations, $\kappa D^{1/2}$, inside the nearer end of the interval. Let
+\[
+L_q(\kappa) = \sup\{F_Y^{-1}(q) : Y \in \mathcal B,\ E(Y) \le -\kappa,\ \pr(Y + Z \le 0) \ge q\}.
+\]
+
+\begin{theorem}\label{thm:transition}
+Let $1 - \mathrm{e}^{-1} < q < 1$, $x > 0$ and $W \in \mathcal B$ with $\pr(|W + x^{1/2}Z| \le 1) \ge q$. Then $|E(W)| < 1$, and if $\Delta = Q_q(|W|) - 1 > 0$,
+\begin{equation}\label{eq:necessary}
+2\{1 - |E(W)|\}\Delta + \Delta^2 \le x .
+\end{equation}
+Moreover, for every $\kappa \ge 0$,
+\[
+\lim_{x \to 0} x^{-1/2}\{R^{(b_x)}_{q,q}(x) - 1\} = L_q(\kappa),
+\]
+and the same limit holds with $\LC$ replaced by $\mathcal B$ in the definition of $R^{(b)}$.
+\end{theorem}
+
+Inequality~\eqref{eq:necessary} is Theorem~\ref{thm:mean} with $t = 1$; at $1 - |E(W)| = \kappa x^{1/2}$ it gives $\Delta \le \{(\kappa^2 + 1)^{1/2} - \kappa\}x^{1/2}$, and the limit gives the exact constant. The condition $q > 1 - \mathrm{e}^{-1}$ gives $|E(W)| < 1$, since a law in $\mathcal B$ has at least mass $\mathrm{e}^{-1}$ on each side of its mean. The function $L_q$ equals $c_q$ up to $\kappa \approx 20$ at $q = 0.9$ and then decays like $1/\kappa$ (Lemma~\ref{lem:meanonesided}).
 
 \begin{lemma}\label{lem:meanonesided}
 Let $\mathrm{e}^{-1} < q < 1$ and $\kappa \ge 0$. Then
@@ -303,7 +334,7 @@ For $q > 1/2$, $v_q$ is continuous on $(0,\infty)$, tends to $0$ as $u \to 0$ an
 \emph{Large $\kappa$.} Since $m_u(b) \ge \Phi(-b)$, $b_u(q) \ge -\Phi^{-1}(q)$, so $k_q$ is bounded on $[u_0, \infty)$ for every $u_0 > 0$ and $k_q(u) \ge \kappa$ forces $u \to 0$ as $\kappa \to \infty$; moreover $u b_u(q) \to \log(1/q)$, so $k_q(u) = \{A + o(1)\}/u$, and $v_q(u) = u/2 + o(u)$ as $u \to 0$ (proof of Lemma~\ref{lem:onesided}). These expansions give $\kappa L_q(\kappa) \to A/2$: for large $\kappa$ only small $u$ are feasible, $u \le \{A + o(1)\}/\kappa$, and $v_q(u) \le \{1 + o(1)\}u/2$ with equality at the boundary. Monotonicity is clear, and $L_q(\kappa) = c_q$ while a maximizer of $v_q$ is feasible.
 \end{proof}
 
-\begin{proof}[Proof of Theorem~\ref{M-thm:mean}]
+\begin{proof}[Proof of Theorem~\ref{thm:mean}]
 Let $\mu = E(W)$. If $W$ is a point mass, $Q_q(|W|) = |\mu| \le M$. Otherwise, for $s > 0$ the law of $W + s^{1/2}Z$ is in $\mathcal B$ \citep{saumard2019}, with mean $\mu$, distribution function $F_s$ and a positive smooth density $f_s$. For $r > \mu$ let $h = f_s(r)/F_s(r)$. The tangent of $\log F_s$ at $r$ gives $F_s(y) \le \min\{F_s(r)\mathrm{e}^{h(y - r)}, 1\}$, the distribution function of an exponential tail with mean $r - \{1 + \log F_s(r)\}/h$ that lies stochastically below $W + s^{1/2}Z$, so $\mu \ge r - \{1 + \log F_s(r)\}/h$ and $h(r - \mu) \le 1$. Laws in $\mathcal B$ satisfy $f_s' \le f_s^2/F_s$ \citep{dumbgen2017}, so $(\log f_s)'(r) \le h \le 1/(r - \mu)$; applied to $-W$ this gives $(\log f_s)'(-r) \ge -1/(r + \mu)$. Hence, for $r > M$,
 \[
 f_s'(r) \le \frac{f_s(r)}{r - M}, \qquad -f_s'(-r) \le \frac{f_s(-r)}{r - M}.
@@ -315,24 +346,24 @@ Let $H_s(r) = \pr(|W + s^{1/2}Z| \le r)$. By the heat equation $\partial_s f_s =
 The quantile $r(s) = Q_q(|W + s^{1/2}Z|)$ solves $H_s\{r(s)\} = q$ and is continuously differentiable on $s > 0$, with $r'(s) \ge -1/[2\{r(s) - M\}]$ where $r(s) > M$. Hence $\{r(s) - M\}_+^2$ has derivative at least $-1$ almost everywhere, and $\{r(\varepsilon) - M\}_+^2 \le \{r(\sigma^2) - M\}_+^2 + \sigma^2 - \varepsilon$. As $\varepsilon \to 0$, $r(\varepsilon) \to Q_q(|W|)$, because a nondegenerate law in $\mathcal B$ has a positive density on the interior of its support \citep{dumbgen2017}, so the distribution function of $|W|$ is continuous and strictly increasing where it lies strictly between $0$ and $1$. Since $r(\sigma^2) \le t$, the first inequality follows, and the second from $(d^2 + \sigma^2)^{1/2} \le d + \sigma^2/(2d)$.
 \end{proof}
 
-\subsection*{Theorem~\ref{M-thm:transition}: the transition}
+\subsection*{Theorem~\ref{thm:transition}: the transition}
 
-\begin{proof}[Proof of Theorem~\ref{M-thm:transition}, first part]
-Let $V = W + x^{1/2}Z$ with distribution function $F$. Since $\log F$ and $\log(1 - F)$ are concave and $F(V)$ is uniform, $E\{\log F(V)\} = -1$ and Jensen's inequality gives $F\{E(V)\} \ge \mathrm{e}^{-1}$ and likewise $1 - F\{E(V)\} \ge \mathrm{e}^{-1}$. If $E(W) \ge 1$ then $\pr(|V| \le 1) \le F\{E(W)\} \le 1 - \mathrm{e}^{-1} < q$, and similarly if $E(W) \le -1$; so $|E(W)| < 1$. Theorem~\ref{M-thm:mean} with $M = |E(W)|$ and $t = 1$ gives $\Delta \le (d^2 + x)^{1/2} - d$ with $d = 1 - |E(W)|$, which is \eqref{M-eq:necessary}.
+\begin{proof}[Proof of Theorem~\ref{thm:transition}, first part]
+Let $V = W + x^{1/2}Z$ with distribution function $F$. Since $\log F$ and $\log(1 - F)$ are concave and $F(V)$ is uniform, $E\{\log F(V)\} = -1$ and Jensen's inequality gives $F\{E(V)\} \ge \mathrm{e}^{-1}$ and likewise $1 - F\{E(V)\} \ge \mathrm{e}^{-1}$. If $E(W) \ge 1$ then $\pr(|V| \le 1) \le F\{E(W)\} \le 1 - \mathrm{e}^{-1} < q$, and similarly if $E(W) \le -1$; so $|E(W)| < 1$. Theorem~\ref{thm:mean} with $M = |E(W)|$ and $t = 1$ gives $\Delta \le (d^2 + x)^{1/2} - d$ with $d = 1 - |E(W)|$, which is \eqref{eq:necessary}.
 \end{proof}
 
-\begin{proof}[Proof of Theorem~\ref{M-thm:transition}, the limit]
+\begin{proof}[Proof of Theorem~\ref{thm:transition}, the limit]
 \emph{Lower bound.} For the lower bound in the limit, take $u$ with $k_q(u) \ge \kappa$ and the law $W = 1 + x^{1/2}\{b_u(q + \eta_x) - E_u\}$ of the lower bound in Theorem~\ref{M-thm:small}. Its mean is $1 + x^{1/2}\{b_u(q + \eta_x) - u^{-1}\} \le 1 - \kappa x^{1/2}$, because $b_u$ decreases in its argument, and it is positive for small $x$; hence $\liminf_{x\to0} x^{-1/2}\{R^{(b_x)}_{q,q}(x) - 1\} \ge v_q(u)$ for every such $u$.
 
 The upper bound is proved by contradiction in four steps.
 
-\emph{Step 1: rescaling near the boundary.} For the upper bound, suppose that $x_n \to 0$, $h_n = x_n^{1/2}$, and that $W_n$ is feasible for $R^{(b_{x_n})}_{q,q}(x_n)$ with $Q_q(|W_n|) - 1 \ge a_0 h_n$, where $L_q(\kappa) < a_0 < 1$. By \eqref{M-eq:necessary}, $\kappa h_n \le 1 - |E(W_n)| \le \bar\kappa h_n$ with $\bar\kappa = (1 - a_0^2)/(2a_0)$. Replacing $W_n$ by $-W_n$ if necessary, $E(W_n) \ge 0$; let $Y_n = (W_n - 1)/h_n$, so that $-\bar\kappa \le E(Y_n) \le -\kappa$.
+\emph{Step 1: rescaling near the boundary.} For the upper bound, suppose that $x_n \to 0$, $h_n = x_n^{1/2}$, and that $W_n$ is feasible for $R^{(b_{x_n})}_{q,q}(x_n)$ with $Q_q(|W_n|) - 1 \ge a_0 h_n$, where $L_q(\kappa) < a_0 < 1$. By \eqref{eq:necessary}, $\kappa h_n \le 1 - |E(W_n)| \le \bar\kappa h_n$ with $\bar\kappa = (1 - a_0^2)/(2a_0)$. Replacing $W_n$ by $-W_n$ if necessary, $E(W_n) \ge 0$; let $Y_n = (W_n - 1)/h_n$, so that $-\bar\kappa \le E(Y_n) \le -\kappa$.
 
 \emph{Step 2: a variance bound.} The law of $T_n = Y_n + Z$ is in $\mathcal B$, with a smooth positive density of maximum $M_n$ and distribution function $F_n$, and $F_n(0) \ge \pr(|W_n + h_nZ| \le 1) \ge q$ while $F_n\{E(T_n)\} \le 1 - \mathrm{e}^{-1}$ by the first part. So $q - 1 + \mathrm{e}^{-1} \le F_n(0) - F_n\{E(T_n)\} \le M_n \bar\kappa$. For a law in $\mathcal B$ with smooth density $g$, maximum $M$ and median $m$, the hazard $g/(1 - F)$ is nondecreasing, so $g(y) \le 2g(m)\{1 - F(y)\} \le 2g(m)$ for $y \le m$, and $g/F$ is nonincreasing, which gives the same for $y \ge m$; so $g(m) \ge M/2$; the tangent bounds for $\log F$ and $\log(1-F)$ at $m$ give $\pr(|T - m| > y) \le \mathrm{e}^{-2g(m)y}$, hence $\var(T) \le 1/\{2g(m)^2\} \le 2/M^2$. Thus $\var(Y_n) \le 2\bar\kappa^2/(q - 1 + \mathrm{e}^{-1})^2$, the $Y_n$ are tight and uniformly integrable.
 
 \emph{Step 3: the limit.} Along a subsequence $Y_n \to Y$ in distribution with $Y \in \mathcal B$, possibly a point mass, since $\mathcal B$ is closed under weak convergence \citep{saumard2019}, $E(Y) \le -\kappa$ and $\pr(Y + Z \le 0) = E\{\Phi(-Y)\} \ge q$.
 
-\emph{Step 4: contradiction with the one-sided optimum.} On $\{W_n \ge 0\}$, whose probability tends to one, $(|W_n| - 1)/h_n = Y_n$, so $a_0 \le \{Q_q(|W_n|) - 1\}/h_n \to Q_q(Y) \le L_q(\kappa)$ by Lemma~\ref{lem:meanonesided}, where the quantile converges because a law in $\mathcal B$ has a unique $q$-quantile or is a point mass. This contradicts $a_0 > L_q(\kappa)$, so $\limsup_{x\to0} x^{-1/2}\{R^{(b_x)}_{q,q}(x) - 1\} \le a_0$ for every $a_0 \in (L_q(\kappa), 1)$; if $L_q(\kappa) \ge 1$ there is nothing to prove, because \eqref{M-eq:necessary} gives $\Delta < x^{1/2}$.
+\emph{Step 4: contradiction with the one-sided optimum.} On $\{W_n \ge 0\}$, whose probability tends to one, $(|W_n| - 1)/h_n = Y_n$, so $a_0 \le \{Q_q(|W_n|) - 1\}/h_n \to Q_q(Y) \le L_q(\kappa)$ by Lemma~\ref{lem:meanonesided}, where the quantile converges because a law in $\mathcal B$ has a unique $q$-quantile or is a point mass. This contradicts $a_0 > L_q(\kappa)$, so $\limsup_{x\to0} x^{-1/2}\{R^{(b_x)}_{q,q}(x) - 1\} \le a_0$ for every $a_0 \in (L_q(\kappa), 1)$; if $L_q(\kappa) \ge 1$ there is nothing to prove, because \eqref{eq:necessary} gives $\Delta < x^{1/2}$.
 \end{proof}
 
 \subsection*{Centred laws}
@@ -379,11 +410,11 @@ Figure~\ref{fig:s-boundary} shows $R_{q,q}(x) - 1$ computed by grid maximization
 \centering
 % Alt text: Log-log plot of the leading coefficient against the scaled distance of the mean from the boundary for three levels; each curve is flat up to about 7, 20 and 50, then decays like the reciprocal of the distance, just below a grey upper bound.
 \includegraphics[width=0.9\textwidth]{fig_transition.pdf}
-\caption{Leading coefficient $L_q(\kappa)$ of the worst-case radius correction, times $100$, when the mean lies at distance at least $\kappa x^{1/2}$ from the boundary (Theorem~\ref{M-thm:transition}), for $q = 0.8$ (solid), $0.9$ (dashes) and $0.95$ (dots), with the upper bound $\min\{c_q, (\kappa^2 + 1)^{1/2} - \kappa\}$ from Theorems~\ref{M-thm:small} and~\ref{M-thm:mean} (grey). Both axes are logarithmic.}
+\caption{Leading coefficient $L_q(\kappa)$ of the worst-case radius correction, times $100$, when the mean lies at distance at least $\kappa x^{1/2}$ from the boundary (Theorem~\ref{thm:transition}), for $q = 0.8$ (solid), $0.9$ (dashes) and $0.95$ (dots), with the upper bound $\min\{c_q, (\kappa^2 + 1)^{1/2} - \kappa\}$ from Theorems~\ref{M-thm:small} and~\ref{thm:mean} (grey). Both axes are logarithmic.}
 \label{fig:s-transition}
 \end{figure}
 
-The following values are computed in double precision by \texttt{experiments/e32\_centering.py} and are not certified. Table~\ref{tab:s-transition} lists, for $q = 0.8$, $0.9$ and $0.95$, the end $\kappa^*_q$ of the flat part of $L_q$ and the maximizer $u^*$ of $v_q$ at which it is attained, the value of $\kappa$ at which the two upper bounds in Fig.~\ref{fig:s-transition} cross, where $L_q/U_q$ is smallest, with $U_q(\kappa) = \min\{c_q, (\kappa^2 + 1)^{1/2} - \kappa\}$ the upper bound from Theorems~\ref{M-thm:small} and~\ref{M-thm:mean}, that smallest ratio, and the limit $1 - \log(1/q)$ of the ratio as $\kappa \to \infty$.
+The following values are computed in double precision by \texttt{experiments/e32\_centering.py} and are not certified. Table~\ref{tab:s-transition} lists, for $q = 0.8$, $0.9$ and $0.95$, the end $\kappa^*_q$ of the flat part of $L_q$ and the maximizer $u^*$ of $v_q$ at which it is attained, the value of $\kappa$ at which the two upper bounds in Fig.~\ref{fig:s-transition} cross, where $L_q/U_q$ is smallest, with $U_q(\kappa) = \min\{c_q, (\kappa^2 + 1)^{1/2} - \kappa\}$ the upper bound from Theorems~\ref{M-thm:small} and~\ref{thm:mean}, that smallest ratio, and the limit $1 - \log(1/q)$ of the ratio as $\kappa \to \infty$.
 
 \begin{table}[h]
 \centering
@@ -402,7 +433,7 @@ limit $1 - \log(1/q)$ & $0.777$ & $0.895$ & $0.949$ \\
 \end{tabular}
 \end{table}
 
-At $q = 0.9$, $L_q(25) = 0.017393$ and $L_q(50) = 0.0089448$. For the mean-zero laws of Proposition~\ref{prop:centred}, the coefficient with $\beta = 0.2$ and $\ell = 2$ at $q = 0.9$ is $0.0156540$; the expansion is accurate to $6\times10^{-5}$ at $x = 1.3\times10^{-4}$ but fails at $x \approx 1.1\times10^{-3}$, where the noise reaches the end of the support and the threshold may already be shrunk. As a numerical check of the proved bound of Theorem~\ref{M-thm:mean}, including its form with $|E(W)| \le M$, it was evaluated on $642$ laws from the family of Proposition~\ref{prop:centred}, with no violation.
+At $q = 0.9$, $L_q(25) = 0.017393$ and $L_q(50) = 0.0089448$. For the mean-zero laws of Proposition~\ref{prop:centred}, the coefficient with $\beta = 0.2$ and $\ell = 2$ at $q = 0.9$ is $0.0156540$; the expansion is accurate to $6\times10^{-5}$ at $x = 1.3\times10^{-4}$ but fails at $x \approx 1.1\times10^{-3}$, where the noise reaches the end of the support and the threshold may already be shrunk. As a numerical check of the proved bound of Theorem~\ref{thm:mean}, including its form with $|E(W)| \le M$, it was evaluated on $642$ laws from the family of Proposition~\ref{prop:centred}, with no violation.
 
 \subsection*{The location of the mean in examples}
 
@@ -418,15 +449,15 @@ Figure~\ref{fig:s-mean} shows the radius correction for laws scaled so that the 
 
 \subsection*{The limit with $\kappa$ fixed}
 
-Theorem~\ref{M-thm:transition} does not extend to $\kappa$ growing like $x^{-1/2}$, that is, to centred laws; this subsection shows why. Applying the small-$u$ construction to a centred law, that is, $\kappa = x^{-1/2}$, gives in the limit a left exponential tail of rate $1 - \log(1/q)$ whose noise-free central coverage is $q\{1 - \mathrm{e}^{-2 + 2\log(1/q)}\}$, $0.750$ at $q = 0.9$, far below the constraint. So $\{1 - \log(1/q)\}/2$ is not a lower bound for the centred coefficient.
+Theorem~\ref{thm:transition} does not extend to $\kappa$ growing like $x^{-1/2}$, that is, to centred laws; this subsection shows why. Applying the small-$u$ construction to a centred law, that is, $\kappa = x^{-1/2}$, gives in the limit a left exponential tail of rate $1 - \log(1/q)$ whose noise-free central coverage is $q\{1 - \mathrm{e}^{-2 + 2\log(1/q)}\}$, $0.750$ at $q = 0.9$, far below the constraint. So $\{1 - \log(1/q)\}/2$ is not a lower bound for the centred coefficient.
 
 \subsection*{Bi-log-concave laws: scope and examples}
 
 Lemma~\ref{lem:onesided} holds over $\mathcal B$ with the same $c_{p,q}$, and so do the upper bounds of Theorem~\ref{M-thm:small} and Corollary~\ref{M-cor:slack}. The proof of Lemma~\ref{lem:onesided} uses only the concavity of $\log F_Y$ at the $q$-quantile, so its upper bound holds for every $Y$ with $\log F_Y$ concave, and exponential tails are in $\LC$, which gives equality. In the proof of Theorem~\ref{M-thm:small}, $Y = (W - 1)/x^{1/2}$ has $\log F_Y$ concave, and $(-W - 1)/x^{1/2}$ has a concave log distribution function because $\log(1 - F_W)$ is concave and $F_W$ is continuous. The lower bound uses laws in $\LC \subset \mathcal B$.
 
-Proposition~\ref{prop:reduction} and the double-precision upper bounds of \S~\ref{sec:s-cert} use log-concavity of the density; the ball-arithmetic constants do not. Theorems~\ref{M-thm:mean} and~\ref{M-thm:transition}, Lemma~\ref{lem:meanonesided}, Theorem~\ref{M-prop:unknown} and Corollary~\ref{cor:simple} hold over $\mathcal B$, by the facts of \S~\ref{sec:s-prelim}: monotone hazards, the bound $f' \le f^2/F$, and closure under convolution with a log-concave law and under weak limits.
+Proposition~\ref{prop:reduction} and the double-precision upper bounds of \S~\ref{sec:s-cert} use log-concavity of the density; the ball-arithmetic constants do not. Theorems~\ref{thm:mean} and~\ref{thm:transition}, Lemma~\ref{lem:meanonesided}, Theorem~\ref{M-prop:unknown} and Corollary~\ref{cor:simple} hold over $\mathcal B$, by the facts of \S~\ref{sec:s-prelim}: monotone hazards, the bound $f' \le f^2/F$, and closure under convolution with a log-concave law and under weak limits.
 
-Symmetry alone does not make noisy calibration conservative in $\mathcal B$. The density $f(w) = \{1 + 0.05\cos(2\pi w)\}/2$ on $(-1, 1)$ is in $\mathcal B$, because $\sup|f'| = 0.05\pi < \inf f^2 = 0.2256$ \citep[][Theorem~1]{dumbgen2017}, but it is not unimodal. At $q = 0.7$, $r_0 = Q_q(|W|) \approx 0.7077$ and $f'(r_0) > 0$; since $f'$ is odd, $\partial_s \pr(|W + s^{1/2}Z| \le r_0) = f'(r_0) > 0$ at $s = 0$, so noise raises the coverage and the noisy quantile falls below $r_0$, to $0.707676$ at $s = 10^{-5}$, against $r_0 = 0.707678$. Anderson's comparison needs unimodality. The bound of Theorem~\ref{M-thm:mean} with $E(W) = 0$ holds for this cosine density, recentred to mean zero, and for its version with the cosine phase-shifted by $\pi/2$, at $q = 0.3, 0.7, 0.9$ and $s = 10^{-3}, 0.1, 1$ (test suite).
+Symmetry alone does not make noisy calibration conservative in $\mathcal B$. The density $f(w) = \{1 + 0.05\cos(2\pi w)\}/2$ on $(-1, 1)$ is in $\mathcal B$, because $\sup|f'| = 0.05\pi < \inf f^2 = 0.2256$ \citep[][Theorem~1]{dumbgen2017}, but it is not unimodal. At $q = 0.7$, $r_0 = Q_q(|W|) \approx 0.7077$ and $f'(r_0) > 0$; since $f'$ is odd, $\partial_s \pr(|W + s^{1/2}Z| \le r_0) = f'(r_0) > 0$ at $s = 0$, so noise raises the coverage and the noisy quantile falls below $r_0$, to $0.707676$ at $s = 10^{-5}$, against $r_0 = 0.707678$. Anderson's comparison needs unimodality. The bound of Theorem~\ref{thm:mean} with $E(W) = 0$ holds for this cosine density, recentred to mean zero, and for its version with the cosine phase-shifted by $\pi/2$, at $q = 0.3, 0.7, 0.9$ and $s = 10^{-3}, 0.1, 1$ (test suite).
 
 The bimodal law of Table~\ref{tab:synth}, the mixture $\pi N(m_1, s^2) + (1-\pi)N(m_2, s^2)$ with mean zero, variance one and $(m_2 - m_1)/s = 2.5$, is in $\mathcal B$ by the following lemma. With $\pi = 0.4$ the mixture stays in $\mathcal B$ up to a separation of about $2.59$, while bimodality starts at about $2.443$ (numerical). The parameters are $\pi = 0.4$, $m_1 = -0.94868$, $m_2 = 0.63246$ and $s = 0.63246$.
 
@@ -620,7 +651,7 @@ The design is that of \S~\ref{M-sec:numerical} (\texttt{experiments/e43\_same\_i
 
 \begin{table}[h]
 \centering
-\caption{Stress test, equal variances: mean conditional latent coverage and reliability (standard errors in parentheses), target $0.9$ and $0.95$}
+\caption{Stress test, equal variances: mean conditional latent coverage and reliability (standard errors in parentheses), target $0.9$ and $0.95$; the rows for $K = 10^3$ and $10^4$ are Table~\ref{M-tab:stress}}
 \label{tab:s-stress}
 \begin{tabular}{llccc}
 \toprule
@@ -740,7 +771,7 @@ Centring and transition values, Fig.~\ref{fig:s-transition} & \texttt{e32\_cente
 Location of the mean, Fig.~\ref{fig:s-mean} & \texttt{e35\_mean\_location.py}, \texttt{fig\_mean\_location.py} & \texttt{mean\_location.csv} \\
 Table~\ref{tab:synth}, rules with known variances & \texttt{e20\_hetldc\_synth.py}, \texttt{e31\_shape\_free.py} & \texttt{hetldc\_synth\_summary.csv}, \texttt{shape\_free\_summary.csv} \\
 Analytic rules, $2000$ data sets & \texttt{e36\_analytic\_reliability.py} & \texttt{analytic\_reliability\_summary.csv} \\
-Stress test, Table~\ref{tab:s-stress} & \texttt{e38\_stress.py} & \texttt{stress\_summary.csv} \\
+Stress test, Table~\ref{M-tab:stress} and Table~\ref{tab:s-stress} & \texttt{e38\_stress.py} & \texttt{stress\_summary.csv} \\
 Proposition~\ref{M-prop:fail}, Fig.~\ref{fig:s-reliability} & \texttt{e40\_exact\_reliability.py} & \texttt{exact\_reliability.csv} \\
 Sensitivity to a shared latent law & \texttt{e39\_sensitivity.py} & \texttt{sensitivity\_summary.csv}, \texttt{sensitivity\_stress.csv} \\
 Oracle-matched widths & \texttt{e15\_e12\_exact.py} & \texttt{conditional\_synth\_exact\_matched.csv} \\

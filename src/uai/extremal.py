@@ -337,7 +337,7 @@ def split_constant(p, q, n=21):
 
 
 # ---------------------------------------------------------------------------------------------
-# Centring (Theorems 4 and 5 and Supplementary Lemma S2 of the paper). If |EW| <= 1 - kappa sqrt(x) and q > 1 - 1/e,
+# Centring (Supplementary Theorems S1 and S2 and Lemma S2 of the paper). If |EW| <= 1 - kappa sqrt(x) and q > 1 - 1/e,
 #   lim_{x -> 0} {R_q^(kappa)(x) - 1} / sqrt(x) = L_q(kappa) = sup{ v(u) : k(u) >= kappa },
 #   v(u) = b_u - log(1/q)/u,  k(u) = 1/u - b_u,  b_u = b_u(q).
 # The exponential tail b_u - E, E ~ Exp(u), has mean -k(u); L_q(0) = c_q.
@@ -374,7 +374,7 @@ def transition_constant(q, kappa, log_u=np.linspace(np.log(1e-6), np.log(50), 40
 
 
 def transition_upper(q, kappa):
-    """U_q(kappa) = min{c_q, sqrt(kappa^2 + 1) - kappa}: Theorem 3 and the mean-offset bound of Theorem 4."""
+    """U_q(kappa) = min{c_q, sqrt(kappa^2 + 1) - kappa}: Theorem 3 and the mean-offset bound of Supplementary Theorem S1."""
     return min(tail_optimum(q)[1], np.sqrt(kappa * kappa + 1) - kappa)
 
 

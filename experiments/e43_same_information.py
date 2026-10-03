@@ -1,4 +1,4 @@
-"""E43: rules with the same information (Supplementary Material, S9; Table 2).
+"""E43: rules with the same information (Supplementary Material, S9; Table 3).
 
 No rule is told the noise law or the noise variances: each is the noisy conformal threshold
 T = |V|_(k) at the rank of Theorem 2 for a stated noise class, at q = 0.9, delta = 0.05. The

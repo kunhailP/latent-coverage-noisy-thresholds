@@ -56,7 +56,7 @@ comparison:
 	$(PY) experiments/e40_exact_reliability.py
 	$(PY) experiments/e39_sensitivity.py 2000
 
-# Proposition 2 (unimodal latent laws) and Table 2 (rules with the same information)
+# Proposition 2 (unimodal latent laws) and Table 3 (rules with the same information)
 same-information:
 	$(PY) experiments/e42_unimodal_boundary.py
 	$(PY) experiments/e43_same_information.py
